@@ -1,25 +1,33 @@
 const crypto = require('crypto');
+import Category from "./Category";
 
 export default class Vehicle {
     vehicle_id?:string;
-    placa?:string;
+    plate?:string;
     price?:number;
     category?:string;
     owner_id?:string;
+    weight?:number;  
+    codeCategory!:string; 
+
     private constructor ( ){};
+
     static create(input:Input):Vehicle{
         const vehicle = new Vehicle();
         vehicle.vehicle_id=crypto.randomUUID();
-        vehicle.placa=input.placa;
+        vehicle.plate=input.plate;
         vehicle.price=input.price;
-        vehicle.category=input.category;
+        vehicle.codeCategory=input.codeCategory;
+        vehicle.category= input.category;
+        vehicle.weight = input.weight;
         vehicle.owner_id=input.owner_id;
         return vehicle;
     }
-    static restore(input:any){
+
+    static restore(input:InputDb){
       const vehicle = new Vehicle();
       vehicle.vehicle_id= input.vehicle_id;
-      vehicle.placa = input.placa;  
+      vehicle.plate = input.plate;  
       vehicle.price = input.price;  
       vehicle.category = input.category;     
       vehicle.owner_id=input.owner_id;
@@ -27,15 +35,18 @@ export default class Vehicle {
     }
 }
 
-interface Input {
-    placa:string,
+export interface Input {
+    plate:string,
     price:number,
     category:string,
-    owner_id:string
+    owner_id:string,
+    codeCategory:string,
+    weight:number
 }
+
 interface InputDb {
     vehicle_id:string,
-    placa:string,
+    plate:string,
     price:number,
     category:string,
     owner_id:string
