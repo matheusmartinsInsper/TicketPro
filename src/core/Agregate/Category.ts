@@ -1,20 +1,26 @@
 export default class Category {
+
+    categoryId!:string;
+    codeCategory!:string;
+    weigth!:number;
     category!:string;
-    categorys = new Map()
-    constructor(category: string) {
-        this.categorys.set("leve",1)
-        this.categorys.set("Medio",2)
-        this.categorys.set("Pesado",3)
-        if(this.categorys.has(category)){
-            this.category=category
+    categorys:string[] = ["Leve","Medio","Pesado"]
+
+    constructor(category: string,codeCategory:string,weigth:number) {
+        if(this.categorys.includes(category)){
+            this.category=category;
+            this.weigth=weigth;
+            this.codeCategory=codeCategory;
         }else{
-            throw Error(`categoria  ${category} invalida`)
+            throw Error(`categoria  ${category} invalida, apenas Leve,Medio e Pesado permitidos`)
         }
     }
-    getValue(){
+
+    getCategory(){
         return this.category;
     }
-    getWeight(category:string):number{
-        return this.categorys.get(category)!;
+
+    getWeight():number{
+        return this.weigth;
     }
 }
