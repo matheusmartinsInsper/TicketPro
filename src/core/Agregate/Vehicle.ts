@@ -31,6 +31,7 @@ export default class Vehicle {
       vehicle.price = input.price;  
       vehicle.category = input.category;     
       vehicle.owner_id=input.owner_id;
+      vehicle.weight=input.weight || 0 ;    
       return vehicle;
     }
 }
@@ -44,10 +45,11 @@ export interface Input {
     weight:number
 }
 
-interface InputDb {
+export interface InputDb {
     vehicle_id:string,
     plate:string,
     price:number,
     category:string,
-    owner_id:string
+    owner_id:string,
+    weight:number
 }

@@ -9,7 +9,7 @@ export default class TicketService {
     priceService!:number;
     ServiceId!:string;
     private priceTotal!:number;
-    publisherId !: string;
+    publisherClientId !: string;
     assingId?:string;
     productsId?:string[];
     dateStart!:Date;
@@ -27,8 +27,10 @@ export default class TicketService {
      const ticketservice = new TicketService()
      ticketservice.comments= input.comments;
      ticketservice.priceService= input.priceService;
-     ticketservice.publisherId = input.publisherId;
+     ticketservice.publisherClientId = input.publisherClientId;
      ticketservice.weightVehicle = input.weightVehicle;
+     ticketservice.vehicleId = input.vehicleId;
+     ticketservice.ServiceId = input.serviceId;
      ticketservice.priceProducts = ticketservice.setPriceProducts(input.productsPrice); 
      ticketservice.priceTotal = ticketservice.setPriceTotal();
      ticketservice.TicketServiceId = crypto.randomUUID();
@@ -39,9 +41,11 @@ export default class TicketService {
 
     private setPriceProducts(prices:number[]):number{
         let total=0;
-        for(let n  of prices){
-          total+=n;
-        }
+        if(prices.length!==0){
+            for(let n  of prices){
+                total+=n;
+              }
+        } 
         return total;
     }
 
@@ -70,7 +74,9 @@ interface Input {
     weightVehicle:number;
     comments?:string;
     classification:string;
+    serviceId:string;
     priceService: number;
-    publisherId:string;
-    productsPrice:number[]
+    publisherClientId:string;
+    productsPrice:number[];
+    vehicleId:string;
 }
